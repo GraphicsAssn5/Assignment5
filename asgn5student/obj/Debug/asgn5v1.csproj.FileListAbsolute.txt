@@ -14,3 +14,11 @@ C:\BCIT\CST\cst4\Graphics\Assignments\Assn5\asgn5student\obj\Debug\asgn5v1.cspro
 C:\BCIT\CST\cst4\Graphics\Assignments\Assn5\asgn5student\obj\Debug\asgn5v1.AboutDialogBox.resources
 C:\BCIT\CST\cst4\Graphics\Assignments\Assn5\asgn5student\obj\Debug\asgn5v1.Transformer.resources
 C:\BCIT\CST\cst4\Graphics\Assignments\Assn5\asgn5student\obj\Debug\asgn5v1.csproj.GenerateResource.Cache
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\obj\Debug\asgn5v1.exe
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\obj\Debug\asgn5v1.pdb
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\bin\Debug\asgn5v1.exe
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\bin\Debug\asgn5v1.pdb
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\obj\Debug\asgn5v1.csprojResolveAssemblyReference.cache
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\obj\Debug\asgn5v1.AboutDialogBox.resources
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\obj\Debug\asgn5v1.Transformer.resources
+C:\BCIT\CST\cst4\Graphics\Assignment5\Assignment5\asgn5student\obj\Debug\asgn5v1.csproj.GenerateResource.Cache

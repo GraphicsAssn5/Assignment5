@@ -359,6 +359,16 @@ namespace asgn5v1
                         (int)scrnpts[lines[i, 1], 0], (int)scrnpts[lines[i, 1], 1]);
                 }
 
+                for (int row = 0; row < scrnpts.GetLength(0); row++)
+                {
+                    for (int col = 0; col < scrnpts.GetLength(1); col++)
+                    {
+                        //Console.Write("" + scrnpts[row, col] + " ");
+
+                    }
+                    //Console.WriteLine();
+
+                }
 
             } // end of gooddata block	
 		} // end of OnPaint
@@ -432,8 +442,104 @@ namespace asgn5v1
 				return false;
 			}
 			scrnpts = new double[numpts,4];
-			setIdentity(ctrans,4,4);  //initialize transformation matrix to identity
-			return true;
+			setIdentity(ctrans,4 ,4);  //initialize transformation matrix to identity
+
+
+            //init all the transformation matrices to prepare for making TNet
+
+            //translation matrix
+            double[,] translateArr = new double[4, 4];
+            setIdentity(translateArr, 4, 4);
+
+            //scaling matrix
+            double[,] scaleArr = new double[4, 4];
+            setIdentity(scaleArr, 4, 4);
+
+            //reflection matrix
+            double[,] reflectArr = new double[4, 4];
+            setIdentity(reflectArr, 4, 4);
+            reflectArr[1, 1] = -1;
+
+            //centering matrix (used to translate to center of screen)
+            double[,] centerArr = new double[4, 4];
+            setIdentity(centerArr, 4, 4);
+            
+
+            //get the points of the shape's center (origin)
+            double originX = vertices[0, 0];
+            double originY = vertices[0, 1];
+            double originZ = vertices[0, 2];
+            //convert to an array for future translation to origin (mult ctrans)
+            double[] origin = { -originX, -originY, -originZ };
+            for (int i = 0; i < origin.Length; i++)
+            {
+                translateArr[3, i] = origin[i];
+            }
+
+            //grab the center points of the screen
+            double centerX = this.Width / 2;
+            double centerY = this.Height / 2;
+
+            //put the center points into the center array for translation (to be used to make TNet)
+            centerArr[3, 0] = centerX;
+            centerArr[3, 1] = centerY;
+
+            //find the min & max widths and heights, to be used when scaling the shape to half the vertical height
+            double verticalMin = double.MaxValue;
+            double verticalMax = double.MinValue;
+            double horizontalMin = double.MaxValue;
+            double horizontalMax = double.MinValue;
+
+            for(int i = 0; i < vertices.GetLength(0); i++)
+            {
+                if(vertices[i,1] < verticalMin)
+                {
+                    verticalMin = vertices[i, 1];
+                }
+
+                if (vertices[i, 1] > verticalMax)
+                {
+                    verticalMax = vertices[i, 1];
+                }
+                
+                if(vertices[i, 0] < horizontalMin)
+                {
+                    horizontalMin = vertices[i, 0];
+                }
+
+                if (vertices[i, 0] > horizontalMax)
+                {
+                    horizontalMax = vertices[i, 0];
+                }
+
+            }
+
+            //scale factor to be used to make the shape half of the vertical height of the screen
+            double scaleH = this.Height / 2 / (verticalMax - verticalMin);
+            //not used since scaling basedd of vertical height only
+            //double scaleW = this.Width / 2 / (horizontalMax - horizontalMin);
+
+            //put the center height relative to the shape height into the scale array for future mult into ctrans (for TNet)
+            scaleArr[0, 0] = scaleH;
+            scaleArr[1, 1] = scaleH;
+
+            //multiply all the matrices and get TNet
+            ctrans = multMatrices(translateArr);
+            ctrans = multMatrices(scaleArr);
+            ctrans = multMatrices(reflectArr);
+            ctrans = multMatrices(centerArr);
+
+            //for (int row = 0; row < ctrans.GetLength(0); row++)
+            //{
+            //    for (int col = 0; col < ctrans.GetLength(1); col++)
+            //    {
+            //        Console.Write("" + ctrans[row, col] + " ");
+
+            //    }
+            //    Console.WriteLine();
+            //}
+
+            return true;
 		} // end of GetNewData
 
 		void DecodeCoords(ArrayList coorddata)
@@ -485,6 +591,27 @@ namespace asgn5v1
 		{
 			
 		}
+
+        //matrix multiplying method
+        private double[,] multMatrices(double[,] temparr)
+        {
+            double value = 0;
+            double[,] c = new double[4, 4];
+
+            for (int row = 0; row < 4; row++)
+            {
+                for (int col = 0; col < 4; col++)
+                {
+                    value = 0;
+                    for (int k = 0; k < 4; k++)
+                    {
+                        value += ctrans[row, k] * temparr[k, col];
+                    }
+                    c[row, col] = value;
+                }
+            }
+            return c;
+        }
 
 		private void toolBar1_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
 		{
