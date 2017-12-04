@@ -25,6 +25,7 @@ namespace asgn5v1
         double[,] vertices;
         double[,] scrnpts;
         double[,] ctrans = new double[4, 4];  //your main transformation matrix
+        Timer rotationTimer;
         private System.Windows.Forms.ImageList tbimages;
         private System.Windows.Forms.ToolBar toolBar1;
         private System.Windows.Forms.ToolBarButton transleftbtn;
@@ -614,8 +615,143 @@ namespace asgn5v1
             return c;
         }
 
+        private void RotateX(object sender, EventArgs e) {
+            RotateX();
+        }
+
+        private void RotateY(object sender, EventArgs e)
+        {
+            RotateY();
+        }
+        
+        private void RotateZ(object sender, EventArgs e)
+        {
+            RotateZ();
+        }
+
+        private void RotateX ()
+        {
+            double centerX = scrnpts[0, 0];
+            double centerY = scrnpts[0, 1];
+            double centerZ = scrnpts[0, 2];
+
+            double[,] centerO =
+            {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {-centerX, -centerY, -centerZ, 1 }
+                };
+
+            ctrans = multMatrices(centerO);
+
+            double[,] rotatex =
+            {
+                    {1, 0, 0, 0 },
+                    {0, Math.Cos(0.05), Math.Sin(0.05), 0 },
+                    {0, -Math.Sin(0.05), Math.Cos(0.05), 0 },
+                    {0, 0, 0, 1 }
+                };
+
+            ctrans = multMatrices(rotatex);
+
+            double[,] tback =
+            {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {centerX, centerY, centerZ, 1 }
+                };
+
+            ctrans = multMatrices(tback);
+
+            Refresh();
+        }
+
+        private void RotateY()
+        {
+            double centerX = scrnpts[0, 0];
+            double centerY = scrnpts[0, 1];
+            double centerZ = scrnpts[0, 2];
+
+            double[,] centerO =
+            {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {-centerX, -centerY, -centerZ, 1 }
+                };
+
+            ctrans = multMatrices(centerO);
+
+            double[,] rotatey =
+            {
+                    {Math.Cos(0.05), 0, Math.Sin(0.05), 0 },
+                    {0, 1, 0, 0 },
+                    {-Math.Sin(0.05), 0, Math.Cos(0.05), 0 },
+                    {0, 0, 0, 1 }
+                };
+
+            ctrans = multMatrices(rotatey);
+
+            double[,] tback =
+            {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {centerX, centerY, centerZ, 1 }
+                };
+
+            ctrans = multMatrices(tback);
+
+            Refresh();
+        }
+
+        private void RotateZ()
+        {
+            double centerX = scrnpts[0, 0];
+            double centerY = scrnpts[0, 1];
+            double centerZ = scrnpts[0, 2];
+
+            double[,] centerO =
+            {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {-centerX, -centerY, -centerZ, 1 }
+                };
+
+            ctrans = multMatrices(centerO);
+
+            double[,] rotateZ =
+            {
+                    {Math.Cos(0.05), Math.Sin(0.05), 0, 0 },
+                    {-Math.Sin(0.05), Math.Cos(0.05), 0, 0 },
+                    {0, 0, 1, 0 },
+                    {0, 0, 0, 1 }
+                };
+
+            ctrans = multMatrices(rotateZ);
+
+            double[,] tback =
+            {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {centerX, centerY, centerZ, 1 }
+                };
+
+            ctrans = multMatrices(tback);
+
+            Refresh();
+        }
+
         private void toolBar1_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
         {
+            if (rotationTimer != null) {
+                rotationTimer.Stop();
+            }
+
             if (e.Button == transleftbtn)
             {
                 double[,] tleft =
@@ -748,131 +884,38 @@ namespace asgn5v1
             }
             if (e.Button == rotxby1btn)
             {
-                double centerX = scrnpts[0, 0];
-                double centerY = scrnpts[0, 1];
-                double centerZ = scrnpts[0, 2];
-
-                double[,] centerO =
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {-centerX, -centerY, -centerZ, 1 }
-                };
-
-                ctrans = multMatrices(centerO);
-
-                double[,] rotatex =
-                {
-                    {1, 0, 0, 0 },
-                    {0, Math.Cos(0.05), Math.Sin(0.05), 0 },
-                    {0, -Math.Sin(0.05), Math.Cos(0.05), 0 },
-                    {0, 0, 0, 1 }
-                };
-
-                ctrans = multMatrices(rotatex);
-
-                double[,] tback =
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {centerX, centerY, centerZ, 1 }
-                };
-
-                ctrans = multMatrices(tback);
-
-                Refresh();
+                RotateX();
             }
             if (e.Button == rotyby1btn)
             {
-                double centerX = scrnpts[0, 0];
-                double centerY = scrnpts[0, 1];
-                double centerZ = scrnpts[0, 2];
-
-                double[,] centerO =
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {-centerX, -centerY, -centerZ, 1 }
-                };
-
-                ctrans = multMatrices(centerO);
-
-                double[,] rotatey =
-                {
-                    {Math.Cos(0.05), 0, Math.Sin(0.05), 0 },
-                    {0, 1, 0, 0 },
-                    {Math.Sin(0.05), 0, Math.Cos(0.05), 0 },
-                    {0, 0, 0, 1 }
-                };
-
-                ctrans = multMatrices(rotatey);
-
-                double[,] tback =
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {centerX, centerY, centerZ, 1 }
-                };
-
-                ctrans = multMatrices(tback);
-
-                Refresh();
+                RotateY();  
             }
             if (e.Button == rotzby1btn)
             {
-                double centerX = scrnpts[0, 0];
-                double centerY = scrnpts[0, 1];
-                double centerZ = scrnpts[0, 2];
-
-                double[,] centerO =
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {-centerX, -centerY, -centerZ, 1 }
-                };
-
-                ctrans = multMatrices(centerO);
-
-                double[,] rotateZ =
-                {
-                    {Math.Cos(0.05), Math.Sin(0.05), 0, 0 },
-                    {-Math.Sin(0.05), Math.Cos(0.05), 0, 0 },
-                    {0, 0, 1, 0 },
-                    {0, 0, 0, 1 }
-                };
-
-                ctrans = multMatrices(rotateZ);
-
-                double[,] tback =
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {centerX, centerY, centerZ, 1 }
-                };
-
-                ctrans = multMatrices(tback);
-
-                Refresh();
+                RotateZ();
             }
 
             if (e.Button == rotxbtn)
             {
-
+                rotationTimer = new Timer();
+                rotationTimer.Tick += new EventHandler(RotateX);
+                rotationTimer.Interval = 10; // in miliseconds
+                rotationTimer.Start();
             }
             if (e.Button == rotybtn)
             {
-
+                rotationTimer = new Timer();
+                rotationTimer.Tick += new EventHandler(RotateY);
+                rotationTimer.Interval = 10; // in miliseconds
+                rotationTimer.Start();
             }
 
             if (e.Button == rotzbtn)
             {
-
+                rotationTimer = new Timer();
+                rotationTimer.Tick += new EventHandler(RotateZ);
+                rotationTimer.Interval = 10; // in miliseconds
+                rotationTimer.Start();
             }
 
             if (e.Button == shearleftbtn)
