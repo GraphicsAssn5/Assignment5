@@ -25,6 +25,7 @@ namespace asgn5v1
         double[,] vertices;
         double[,] scrnpts;
         double[,] ctrans = new double[4, 4];  //your main transformation matrix
+        double[,] initCtrans = new double[4, 4];
         Timer rotationTimer;
         private System.Windows.Forms.ImageList tbimages;
         private System.Windows.Forms.ToolBar toolBar1;
@@ -129,9 +130,9 @@ namespace asgn5v1
             this.resetbtn = new System.Windows.Forms.ToolBarButton();
             this.exitbtn = new System.Windows.Forms.ToolBarButton();
             this.SuspendLayout();
-            //
+            // 
             // tbimages
-            //
+            // 
             this.tbimages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("tbimages.ImageStream")));
             this.tbimages.TransparentColor = System.Drawing.Color.Transparent;
             this.tbimages.Images.SetKeyName(0, "");
@@ -150,9 +151,9 @@ namespace asgn5v1
             this.tbimages.Images.SetKeyName(13, "");
             this.tbimages.Images.SetKeyName(14, "");
             this.tbimages.Images.SetKeyName(15, "");
-            //
+            // 
             // toolBar1
-            //
+            // 
             this.toolBar1.Buttons.AddRange(new System.Windows.Forms.ToolBarButton[] {
             this.transleftbtn,
             this.transrightbtn,
@@ -184,130 +185,130 @@ namespace asgn5v1
             this.toolBar1.Size = new System.Drawing.Size(24, 306);
             this.toolBar1.TabIndex = 0;
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
-            //
+            // 
             // transleftbtn
-            //
+            // 
             this.transleftbtn.ImageIndex = 1;
             this.transleftbtn.Name = "transleftbtn";
             this.transleftbtn.ToolTipText = "translate left";
-            //
+            // 
             // transrightbtn
-            //
+            // 
             this.transrightbtn.ImageIndex = 0;
             this.transrightbtn.Name = "transrightbtn";
             this.transrightbtn.ToolTipText = "translate right";
-            //
+            // 
             // transupbtn
-            //
+            // 
             this.transupbtn.ImageIndex = 2;
             this.transupbtn.Name = "transupbtn";
             this.transupbtn.ToolTipText = "translate up";
-            //
+            // 
             // transdownbtn
-            //
+            // 
             this.transdownbtn.ImageIndex = 3;
             this.transdownbtn.Name = "transdownbtn";
             this.transdownbtn.ToolTipText = "translate down";
-            //
+            // 
             // toolBarButton1
-            //
+            // 
             this.toolBarButton1.Name = "toolBarButton1";
             this.toolBarButton1.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-            //
+            // 
             // scaleupbtn
-            //
+            // 
             this.scaleupbtn.ImageIndex = 4;
             this.scaleupbtn.Name = "scaleupbtn";
             this.scaleupbtn.ToolTipText = "scale up";
-            //
+            // 
             // scaledownbtn
-            //
+            // 
             this.scaledownbtn.ImageIndex = 5;
             this.scaledownbtn.Name = "scaledownbtn";
             this.scaledownbtn.ToolTipText = "scale down";
-            //
+            // 
             // toolBarButton2
-            //
+            // 
             this.toolBarButton2.Name = "toolBarButton2";
             this.toolBarButton2.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-            //
+            // 
             // rotxby1btn
-            //
+            // 
             this.rotxby1btn.ImageIndex = 6;
             this.rotxby1btn.Name = "rotxby1btn";
             this.rotxby1btn.ToolTipText = "rotate about x by 1";
-            //
+            // 
             // rotyby1btn
-            //
+            // 
             this.rotyby1btn.ImageIndex = 7;
             this.rotyby1btn.Name = "rotyby1btn";
             this.rotyby1btn.ToolTipText = "rotate about y by 1";
-            //
+            // 
             // rotzby1btn
-            //
+            // 
             this.rotzby1btn.ImageIndex = 8;
             this.rotzby1btn.Name = "rotzby1btn";
             this.rotzby1btn.ToolTipText = "rotate about z by 1";
-            //
+            // 
             // toolBarButton3
-            //
+            // 
             this.toolBarButton3.Name = "toolBarButton3";
             this.toolBarButton3.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-            //
+            // 
             // rotxbtn
-            //
+            // 
             this.rotxbtn.ImageIndex = 9;
             this.rotxbtn.Name = "rotxbtn";
             this.rotxbtn.ToolTipText = "rotate about x continuously";
-            //
+            // 
             // rotybtn
-            //
+            // 
             this.rotybtn.ImageIndex = 10;
             this.rotybtn.Name = "rotybtn";
             this.rotybtn.ToolTipText = "rotate about y continuously";
-            //
+            // 
             // rotzbtn
-            //
+            // 
             this.rotzbtn.ImageIndex = 11;
             this.rotzbtn.Name = "rotzbtn";
             this.rotzbtn.ToolTipText = "rotate about z continuously";
-            //
+            // 
             // toolBarButton4
-            //
+            // 
             this.toolBarButton4.Name = "toolBarButton4";
             this.toolBarButton4.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-            //
+            // 
             // shearrightbtn
-            //
+            // 
             this.shearrightbtn.ImageIndex = 12;
             this.shearrightbtn.Name = "shearrightbtn";
             this.shearrightbtn.ToolTipText = "shear right";
-            //
+            // 
             // shearleftbtn
-            //
+            // 
             this.shearleftbtn.ImageIndex = 13;
             this.shearleftbtn.Name = "shearleftbtn";
             this.shearleftbtn.ToolTipText = "shear left";
-            //
+            // 
             // toolBarButton5
-            //
+            // 
             this.toolBarButton5.Name = "toolBarButton5";
             this.toolBarButton5.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-            //
+            // 
             // resetbtn
-            //
+            // 
             this.resetbtn.ImageIndex = 14;
             this.resetbtn.Name = "resetbtn";
             this.resetbtn.ToolTipText = "restore the initial image";
-            //
+            // 
             // exitbtn
-            //
+            // 
             this.exitbtn.ImageIndex = 15;
             this.exitbtn.Name = "exitbtn";
             this.exitbtn.ToolTipText = "exit the program";
-            //
+            // 
             // Transformer
-            //
+            // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(508, 306);
             this.Controls.Add(this.toolBar1);
@@ -394,6 +395,7 @@ namespace asgn5v1
 
         void RestoreInitialImage()
         {
+            ctrans = initCtrans;
             Invalidate();
         } // end of RestoreInitialImage
 
@@ -530,7 +532,7 @@ namespace asgn5v1
             ctrans = multMatrices(scaleArr);
             ctrans = multMatrices(reflectArr);
             ctrans = multMatrices(centerArr);
-
+            Array.Copy(ctrans, initCtrans, ctrans.Length);
             //for (int row = 0; row < ctrans.GetLength(0); row++)
             //{
             //    for (int col = 0; col < ctrans.GetLength(1); col++)
@@ -615,7 +617,8 @@ namespace asgn5v1
             return c;
         }
 
-        private void RotateX(object sender, EventArgs e) {
+        private void RotateX(object sender, EventArgs e)
+        {
             RotateX();
         }
 
@@ -623,13 +626,13 @@ namespace asgn5v1
         {
             RotateY();
         }
-        
+
         private void RotateZ(object sender, EventArgs e)
         {
             RotateZ();
         }
 
-        private void RotateX ()
+        private void RotateX()
         {
             double centerX = scrnpts[0, 0];
             double centerY = scrnpts[0, 1];
@@ -748,7 +751,8 @@ namespace asgn5v1
 
         private void toolBar1_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
         {
-            if (rotationTimer != null) {
+            if (rotationTimer != null)
+            {
                 rotationTimer.Stop();
             }
 
@@ -888,7 +892,7 @@ namespace asgn5v1
             }
             if (e.Button == rotyby1btn)
             {
-                RotateY();  
+                RotateY();
             }
             if (e.Button == rotzby1btn)
             {
@@ -920,11 +924,99 @@ namespace asgn5v1
 
             if (e.Button == shearleftbtn)
             {
+                double bottomY = scrnpts[0, 1];
+                double bottomX = 0;
+                double bottomZ = 0;
+
+                for (int i = 0; i < scrnpts.GetLength(0); i++)
+                {
+                    if (scrnpts[i, 1] > bottomY)
+                    {
+                        if (i + 1 < scrnpts.GetLength(0) && scrnpts[i + 1, 1] == scrnpts[i, 1])
+                        {
+                            bottomY = scrnpts[i, 1];
+                            bottomX = scrnpts[i, 0];
+                            bottomZ = scrnpts[i, 2];
+                        }
+                    }
+                }
+
+                double[,] centerO =
+                {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {-bottomX, -bottomY, -bottomZ, 1 }
+                };
+                ctrans = multMatrices(centerO);
+
+                double[,] shearLeft =
+                {
+                    { 1, 0, 0, 0},
+                    { 0.1, 1, 0, 0},
+                    { 0, 0, 1, 0},
+                    { 0, 0, 0, 1}
+                };
+                ctrans = multMatrices(shearLeft);
+
+                double[,] translateBack =
+                {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {bottomX, bottomY, bottomZ, 1 }
+                };
+                ctrans = multMatrices(translateBack);
                 Refresh();
             }
 
             if (e.Button == shearrightbtn)
             {
+                double bottomY = scrnpts[0, 1];
+                double bottomX = 0;
+                double bottomZ = 0;
+
+                for (int i = 0; i < scrnpts.GetLength(0); i++)
+                {
+                    if (scrnpts[i, 1] > bottomY)
+                    {
+                        if (i + 1 < scrnpts.GetLength(0) && scrnpts[i + 1, 1] == scrnpts[i, 1])
+                        {
+                            bottomY = scrnpts[i, 1];
+                            bottomX = scrnpts[i, 0];
+                            bottomZ = scrnpts[i, 2];
+                        }
+                    }
+                }
+
+                double[,] centerO =
+                {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {-bottomX, -bottomY, -bottomZ, 1 }
+                };
+                ctrans = multMatrices(centerO);
+
+                double[,] shearRight =
+                {
+                    { 1, 0, 0, 0},
+                    { -0.1, 1, 0, 0},
+                    { 0, 0, 1, 0},
+                    { 0, 0, 0, 1}
+                };
+                ctrans = multMatrices(shearRight);
+
+                double[,] translateBack =
+                {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {bottomX, bottomY, bottomZ, 1 }
+                };
+                ctrans = multMatrices(translateBack);
+
+
                 Refresh();
             }
 
